@@ -12,27 +12,27 @@ class Controller
 
   def self.add(task_desc)
   	Task.create(text: task_desc, complete: false)
-  	puts "Appended \"#{task_desc}\" to your TODO list..."
   end
 
   def self.delete(task_desc)
   	task_index = task_desc.to_i - 1
   	raise ArgumentError unless task_index >= 0 && task_index < Task.count
 	  	task = Task.limit(1).offset(task_index).first
-	  	puts "Deleted \"#{task.text}\" from your TODO list..."
+	  	message =  "Deleted \"#{task.text}\" from your TODO list..."
 	  	task.destroy
+	  	return message
 	  rescue ArgumentError
-	  	puts "Number not on to do list"
+	  	return "Number not on to do list"
   end
 
   def self.complete(task_desc)
   	task_index = task_desc.to_i - 1
   	raise ArgumentError unless task_index >= 0 && task_index < Task.count
 	  	task = Task.limit(1).offset(task_index).first
-	  	puts "Completed \"#{task.text}\" on your TODO list..."
-	  	task.complete!
+	  	task.complete!	  	
+	  	return "Completed \"#{task.text}\" on your TODO list..."
 	  rescue ArgumentError
-	  	puts "Number not on to do list"
+	  	return "Number not on to do list"
   end
 
   def self.list_outstanding

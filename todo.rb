@@ -9,10 +9,11 @@ class Commands
     case 
     when task == "add"
       Controller.add(task_desc)
+      puts "Appended \"#{task_desc}\" to your TODO list..."
     when task == "list"
       Controller.list
 	  when task == "delete"
-      Controller.delete(task_desc)
+      puts Controller.delete(task_desc)
     when task == "list:outstanding"
       Controller.list_outstanding
     when task == "list:completed"
